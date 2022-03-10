@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBAN</title>
+    <script src="IBAN_check.js"></script>
+    <style>
+        button {
+            height:25px; 
+            border-style: none; 
+            background-color: grey;
+            color: white; 
+            font-weight: bold;
+        }
+        
+        button:hover {
+            background-color: rgb(37, 37, 35);
+        }
+         
+        input:active {
+            color: black;
+        }
+    </style>
+
+</head>
+<body>
+  
+
+    <h1 style="text-align:center">Paprastas IBAN kodo tikrinimas, tik pirminiai pozymiai</h1> 
+    <h5 style="text-align:center"> Pvz.: 
+        Albania: AL47 2121 1009 0000 0002 3569 87411. 
+        Luxembourg: LU 28 001 94006447500003. 
+        Cyprus: CY 17 002 00128 00000012005276002.</h5>
+    <div>
+        <div style="width:60%; padding:20px; margin: auto;">
+           <label for="iban"> <b>IBAN numeris :</b> </label>
+           <input type="text" name="iban" id="ibantxt"  style="width:400px;" required>        
+           <button onclick="checkIBAN();">Tikrinti</button>
+        </div>
+        <div style="width:60%; padding:20px; margin: auto; border:solid 1px;">
+        <h2>Testai : </h2> 
+        <pre id="testai"></pre>   
+        </div>
+
+    </div> 
+</body>
+</html>
