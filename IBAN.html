@@ -28,7 +28,7 @@
 <body>
   
 
-    <h1 style="text-align:center">Paprastas IBAN kodo tikrinimas, tik pirminiai pozymiai</h1> 
+    <h1 style="text-align:center">IBAN kodo tikrinimas</h1> 
     <h5 style="text-align:center"> Pvz.: 
         Albania: AL47 2121 1009 0000 0002 3569 87411. 
         Luxembourg: LU 28 001 94006447500003. 
@@ -39,9 +39,16 @@
            <input type="text" name="iban" id="ibantxt"  style="width:400px;" required>        
            <button onclick="checkIBAN();">Tikrinti</button>
         </div>
-        <div style="width:60%; padding:20px; margin: auto; border:solid 1px;">
-        <h2>Testai : </h2> 
-        <pre id="testai"></pre>   
+        <div style="width:60%; padding:20px; margin: auto; display:flex; justify-content: space-evenly;">
+            <div>
+                <fieldset style="width:270px; border:solid 1px;">
+                    <legend> IBAN informacija </legend> 
+                    <pre id="testai"></pre> 
+                </fieldset> 
+            </div>
+            <div>
+               <img src="IBAN-2.webp" alt="IBAN number" width="500" height="260">
+            </div>
         </div>
 
     </div> 

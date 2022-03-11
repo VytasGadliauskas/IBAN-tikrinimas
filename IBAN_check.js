@@ -38,14 +38,14 @@
         document.getElementById("testai").textContent += '\n Tikrinamas IBAN : '+ number;
         document.getElementById("testai").textContent += '\n IBAN simboliu skaicius : '+ numberlength;
         if (allLetter(numberfirststrs)) {
-            document.getElementById("testai").textContent += '\n IBAN salis :'+ numberfirststrs;    
+            document.getElementById("testai").textContent += '\n IBAN salis : '+ numberfirststrs;    
         } else {
             document.getElementById("testai").textContent += '\n IBAN kodo KLAIDA (KODAS NETEISINGAS !!!)';
             document.getElementById("testai").style.color = "red";
         }
       
         if (isNum(numbersecondstrs)) {
-            document.getElementById("testai").textContent += '\n IBAN testas +'    
+            document.getElementById("testai").textContent += '\n IBAN testas : CHECK DIGIT'    
         } else {
             document.getElementById("testai").textContent += '\n IBAN kodo KLAIDA (KODAS NETEISINGAS -!!!)';
             document.getElementById("testai").style.color = "red";
