@@ -231,7 +231,7 @@
                         if (ibanLiek == 1) { 
                             ibanOK = true;    
                         } else {
-                            ibanOK = false;    
+                        //    ibanOK = false;    
                         }
 
                         
