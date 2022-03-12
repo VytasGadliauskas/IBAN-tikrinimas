@@ -24,13 +24,11 @@
             document.getElementById('body').appendChild(img);
         }    
         
-    /////////////////////////////////////////  Pagrindine  funkcija   
 
     function checkIBAN() {
         var number = document.getElementById("ibantxt").value;
         number = number.toUpperCase();
         number = number.replace(/\s/g, '');
-        ////////////// Nulinam reiksmes  
         ibanSallis = '';
         ibanIlgis = 0;
         ibanBBAN = '';
@@ -127,7 +125,7 @@
             ["Virgin Islands, British",24,"4c,16n","VG kk bbbb cccc cccc cccc cccc"]
         ];
 
-        ////////////////////////////   Gali buti bugas :(
+        ////////////////////////////   Gali buti bugas su atitikimais raidziu i skaiciu R raide :( 
         var ABC = [
             ["A",10],
             ["B",11],
@@ -157,7 +155,6 @@
             ["Z",35]
         ];
 
-
         for (let i = 0; i < ibanData.length; i++) {
             if (number.slice(0,2) == ibanData[i][3].slice(0,2)) {
                 ibanSalis = ibanData[i][0];
@@ -169,27 +166,20 @@
         } 
          
         function ABCtoNUM (aaa) {
-            // console.log('-----------Konvertuojam ABC i Skaiciu pagal IBAN-----------');
             bbb = '';
             ccc = '';
-            // console.log('ABCtoNUM  : ', aaa,' ilgis: ',aaa.length);
             for (let i = 0; i < aaa.length; i++) { 
                 ccc = aaa.slice(i,i+1);
-            //    console.log('ccc : ', ccc);
                 if (allLetter(ccc)){
                     for (let ii = 0; ii < ABC.length; ii++) { 
                         if (ABC[ii][0] == ccc) {
-            //              console.log('pakeitem i : ', ABC[ii][1]);
                             bbb += ABC[ii][1];
                         }
                     }
                 } else {
-            //        console.log('yra skaicius : ', ccc);
                     bbb += ccc;
                 }
             } 
-            // console.log('ABCtoNUM grazina : ', bbb);  
-            // console.log('----------------------------------------------------------'); 
             return bbb;
         }
 
@@ -218,7 +208,7 @@
                         console.log('Skaicius: ',mod97); 
                         liek = mod97 % 97;
                         console.log('Liekana : ', mod97 % 97); 
-
+                        //////////////////  su MOD97 dar reikia pasiaskinti 
                     } else {
                         ibanOK = false;    
                     }
@@ -239,7 +229,7 @@
             document.getElementById("testai").textContent += '\n IBAN salis : '+ ibanSalis; 
             document.getElementById("testai").textContent += '\n IBAN ilgis : '+ ibanIlgis;
             document.getElementById("testai").textContent += '\n IBAN BBAN : '+ ibanBBAN;
-            document.getElementById("testai").textContent += '\n IBAN Formatas ziureti wiki: '+ ibanFORM;
+            document.getElementById("testai").textContent += '\n IBAN Formatas žiureti wiki: '+ ibanFORM;
             document.getElementById("testai").textContent += '\n IBAN MOD97 : '+ liek;  
             document.getElementById("testai").textContent += '\n IBAN OK'
             document.getElementById("testai").style.color = "green";    
