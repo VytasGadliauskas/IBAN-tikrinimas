@@ -35,8 +35,8 @@
         ibanFORM = '';
         ibanOK = false;
         ibanMOD97 = '';
-        liek = 0;
-         
+        ibanLiek = 0;
+
         document.getElementById("testai").style.color = "black";
         document.getElementById("testai").textContent = '';
         document.getElementById("testai").textContent += '\n';
@@ -226,9 +226,15 @@
                         mod97 = mod97sec + mod97fir + mod97mid;
                         console.log('Konveruojam i  skaicius: ',mod97sec,' ',mod97fir,' ',mod97mid ); 
                         console.log('Skaicius: ',mod97); 
-                        liek = mod97 % 97;
-                        console.log('MOD9710 (ISO7064): ', mod9710(mod97)); 
-                        //////////////////  su MOD97 dar reikia pasiaskinti 
+                        ibanLiek = mod9710(mod97);
+                        console.log('MOD9710 (ISO7064): ', ibanLiek); 
+                        if (ibanLiek == 1) { 
+                            ibanOK = true;    
+                        } else {
+                            ibanOK = false;    
+                        }
+
+                        
                     } else {
                         ibanOK = false;    
                     }
@@ -245,18 +251,21 @@
             document.getElementById("testai").textContent += '\n IBAN testas : CHECK IBAN FORMAT OK'
             document.getElementById("testai").textContent += '\n IBAN testas : CHECK COUNTRY DIGIT OK'
             document.getElementById("testai").textContent += '\n IBAN testas : CHECK COUNTRY FORMAT - not implemented'
-            document.getElementById("testai").textContent += '\n IBAN testas : CHECK MOD-97 DIGIT OK'
+            document.getElementById("testai").textContent += '\n IBAN testas : CHECK MOD9710 (ISO7064) OK'
             document.getElementById("testai").textContent += '\n IBAN salis : '+ ibanSalis; 
             document.getElementById("testai").textContent += '\n IBAN ilgis : '+ ibanIlgis;
             document.getElementById("testai").textContent += '\n IBAN BBAN : '+ ibanBBAN;
             document.getElementById("testai").textContent += '\n IBAN Formatas žiureti wiki: '+ ibanFORM;
-            document.getElementById("testai").textContent += '\n IBAN MOD97 : '+ liek;  
+            document.getElementById("testai").textContent += '\n IBAN MOD9710 (ISO7064) : '+ ibanLiek;  
             document.getElementById("testai").textContent += '\n IBAN OK'
             document.getElementById("testai").style.color = "green";    
         } else {
             document.getElementById("testai").textContent += '\n IBAN kodo KLAIDA (KODAS NETEISINGAS -!!!)';
             document.getElementById("testai").style.color = "red";
         }
+
+        document.getElementById("ibantxt").value = null; 
+
         ////////////////   HAPPY END I AM PROUD OF MYSELF :)   mail.: vytasgadliauskas@gmail.com
     }
 
