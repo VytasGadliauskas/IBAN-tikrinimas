@@ -183,6 +183,26 @@
             return bbb;
         }
 
+        /////////////////////////////// Sita nufirinau nes ISO7064 nerandu online
+        function mod9710(iban) {
+            /*
+            Calculates the MOD 97 10 of the passed IBAN as specified in ISO7064.
+            @method mod9710
+            @param {String} iban
+            @returns {Number}
+            */
+            var block, remainder;
+            remainder = iban;
+            block = null;
+          
+            while (remainder.length > 2) {
+              block = remainder.slice(0, 9);
+              remainder = (Number.parseInt(block) % 97).toString() + remainder.slice(block.length);
+            }
+          
+            return Number.parseInt(remainder) % 97;
+          }
+
         ///////////////////////////////////////////////////////// TESTAI 
         console.clear();
         console.log('------------------ debug-as --------------------');   
@@ -207,7 +227,7 @@
                         console.log('Konveruojam i  skaicius: ',mod97sec,' ',mod97fir,' ',mod97mid ); 
                         console.log('Skaicius: ',mod97); 
                         liek = mod97 % 97;
-                        console.log('Liekana : ', mod97 % 97); 
+                        console.log('MOD9710 (ISO7064): ', mod9710(mod97)); 
                         //////////////////  su MOD97 dar reikia pasiaskinti 
                     } else {
                         ibanOK = false;    
