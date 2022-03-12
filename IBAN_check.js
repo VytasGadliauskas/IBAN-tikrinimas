@@ -36,8 +36,8 @@
         ibanBBAN = '';
         ibanFORM = '';
         ibanOK = false;
-        //
-        console.log('------------------ debug-as --------------------');         
+        ibanMOD97 = '';
+        liek = 0;
          
         document.getElementById("testai").style.color = "black";
         document.getElementById("testai").textContent = '';
@@ -125,8 +125,38 @@
             ["United Kingdom",22,"4a,14n","GB kk bbbb ssss ss cc cccc cc"],
             ["Vatican City",22,"3n,15n","VA kk bbb c cccc cccc cccc cc"],
             ["Virgin Islands, British",24,"4c,16n","VG kk bbbb cccc cccc cccc cccc"]
-            ];
-              
+        ];
+
+        ////////////////////////////   Gali buti bugas :(
+        var ABC = [
+            ["A",10],
+            ["B",11],
+            ["C",12],
+            ["D",13],
+            ["E",14],
+            ["F",15],
+            ["G",16],
+            ["H",17],
+            ["I",18],
+            ["J",19],
+            ["K",21],
+            ["L",22],
+            ["M",23],
+            ["N",24],
+            ["O",25],
+            ["P",26],
+            ["Q",27],
+            ["S",28],
+            ["T",29],
+            ["U",30],
+            ["V",31],
+            ["W",32],
+            ["X",32],
+            ["Y",32],
+            ["R",33],
+            ["Z",35]
+        ];
+
 
         for (let i = 0; i < ibanData.length; i++) {
             if (number.slice(0,2) == ibanData[i][3].slice(0,2)) {
@@ -135,27 +165,59 @@
                 ibanBBAN = ibanData[i][2];
                 ibanFORM = ibanData[i][3];
 
-
-                console.log('ibanData : ', ibanData[i]);
-                console.log('number1 : ', number.slice(0,2));
-                console.log('number2 : ', number.slice(2,4));
-                console.log('number-length : ', number.length);
-                console.log('ibanSalis : ', ibanSalis);  
-                console.log('ibanIlgis : ', ibanIlgis);
-                console.log('ibanBBAN : ', ibanBBAN);
-                console.log('ibanFORM : ', ibanFORM);
             }
         } 
+         
+        function ABCtoNUM (aaa) {
+            // console.log('-----------Konvertuojam ABC i Skaiciu pagal IBAN-----------');
+            bbb = '';
+            ccc = '';
+            // console.log('ABCtoNUM  : ', aaa,' ilgis: ',aaa.length);
+            for (let i = 0; i < aaa.length; i++) { 
+                ccc = aaa.slice(i,i+1);
+            //    console.log('ccc : ', ccc);
+                if (allLetter(ccc)){
+                    for (let ii = 0; ii < ABC.length; ii++) { 
+                        if (ABC[ii][0] == ccc) {
+            //              console.log('pakeitem i : ', ABC[ii][1]);
+                            bbb += ABC[ii][1];
+                        }
+                    }
+                } else {
+            //        console.log('yra skaicius : ', ccc);
+                    bbb += ccc;
+                }
+            } 
+            // console.log('ABCtoNUM grazina : ', bbb);  
+            // console.log('----------------------------------------------------------'); 
+            return bbb;
+        }
 
         ///////////////////////////////////////////////////////// TESTAI 
+        console.clear();
+        console.log('------------------ debug-as --------------------');   
         /////////////////  Pagal pirmus simbolius   
         if (allLetter(number.slice(0,2))) {
+            console.log('Pirmi du simboliai:',number,' raides: OK');
             ibanOK = true;
                 /////////////////////////  Pagal salies kodo ilgi
                 if  (number.length == ibanIlgis) {
+                    console.log('Simboliu skaicius:',number.length,' atitinka salies IBAN ilgi: OK');
                     /////////////////////////  Pagal antrinius simbolius
                     if (isNum(number.slice(2,4))) {
+                        console.log('Kiti du simboliai:',number.slice(2,4),' atitinka skaiciai: OK');
                         ////////////////////////   mod-97
+                        console.log('Skaiciuojam MOD97: ');
+                        mod97fir = ABCtoNUM(number.slice(0,2));
+                        mod97mid = number.slice(2,4);
+                        mod97sec = ABCtoNUM(number.slice(4,number.length));
+                        console.log('IBAN: ',number);
+                        console.log('Perkialiam: ',number.slice(4,number.length)+number.slice(0,2)+mod97mid);
+                        mod97 = mod97sec + mod97fir + mod97mid;
+                        console.log('Konveruojam i  skaicius: ',mod97sec,' ',mod97fir,' ',mod97mid ); 
+                        console.log('Skaicius: ',mod97); 
+                        liek = mod97 % 97;
+                        console.log('Liekana : ', mod97 % 97); 
 
                     } else {
                         ibanOK = false;    
@@ -168,7 +230,6 @@
             ibanOK = false;    
         }
 
-        ////////////////  Output'as
         console.log('ibanOK : ', ibanOK);
         if (ibanOK) {
             document.getElementById("testai").textContent += '\n IBAN testas : CHECK IBAN FORMAT OK'
@@ -176,7 +237,10 @@
             document.getElementById("testai").textContent += '\n IBAN testas : CHECK COUNTRY FORMAT - not implemented'
             document.getElementById("testai").textContent += '\n IBAN testas : CHECK MOD-97 DIGIT OK'
             document.getElementById("testai").textContent += '\n IBAN salis : '+ ibanSalis; 
-            
+            document.getElementById("testai").textContent += '\n IBAN ilgis : '+ ibanIlgis;
+            document.getElementById("testai").textContent += '\n IBAN BBAN : '+ ibanBBAN;
+            document.getElementById("testai").textContent += '\n IBAN Formatas ziureti wiki: '+ ibanFORM;
+            document.getElementById("testai").textContent += '\n IBAN MOD97 : '+ liek;  
             document.getElementById("testai").textContent += '\n IBAN OK'
             document.getElementById("testai").style.color = "green";    
         } else {
