@@ -44,11 +44,20 @@
         document.getElementById("testai").textContent += '\n';
         document.getElementById("testai").textContent += '\n Tikrinamas IBAN : '+ number;
 
-        /////////////// Ilgis pagal sali
+        /////////////// Ilgis pagal sali, BBAN formatas
         var ibanData = [
-            ["Andorra",        "AD", "0  4n 4n", "0  12   0 "],
-            ["Albania",        "AL", "0  8n 0 ", "0  16   0 "],
-            ["Austria",        "AT", "0  5n 0 ", "0  11n  0 "],
+            ["Andorra",        "AD", 28,"8n,16c"],
+            ["Albania",        "AL", 24,"8n,12c"],
+            ["Austria",        "AT", 20,"16n"],
+            ["Azerbaijan",     "AZ", 28,"4c,20n"],
+            ["",          "AT", "0  5n 0 ", "0  11n  0 "],
+            ["",          "AT", "0  5n 0 ", "0  11n  0 "],
+            ["",          "AT", "0  5n 0 ", "0  11n  0 "],
+            ["",          "AT", "0  5n 0 ", "0  11n  0 "],
+            ["",          "AT", "0  5n 0 ", "0  11n  0 "],
+            
+ 
+ 
             ["Bosnia and Herzegovina", "BA", "0  3n 3n", "0   8n  2n"],
             ["Belgium",        "BE", "0  3n 0 ", "0   7n  2n"],
             ["Bulgaria",       "BG", "0  4a 4n", "2n  8   0 "],
