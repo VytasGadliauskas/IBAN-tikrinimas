@@ -30,9 +30,15 @@
         var number = document.getElementById("ibantxt").value;
         number = number.toUpperCase();
         number = number.replace(/\s/g, '');
-        let numberlength = number.length;
-        let numberfirststrs = number.slice(0,2);
-        let numbersecondstrs = number.slice(2,4); 
+        ////////////// Nulinam reiksmes  
+        ibanSallis = '';
+        numberlength = 0;
+        numberfirststrs = '';
+        numbersecondstrs = '';
+        //
+        // numberlength = number.length;
+        numberfirststrs = number.slice(0,2);
+        numbersecondstrs = number.slice(2,4); 
         document.getElementById("testai").style.color = "black";
         document.getElementById("testai").textContent = '';
         document.getElementById("testai").textContent += '\n';
@@ -93,9 +99,22 @@
             ["San Marino",     "SM", "1a 5n 5n", "0  12   0 "],
             ["Tunisia",        "TN", "0  2n 3n", "0  13n  2n"],
             ["Turkey",         "TR", "0  5n 0 ", "1  16   0 "]];
-        
+                
+        //console.log(ibanData[0][1]);
+        //console.table(ibanData);
+        //console.log(numberfirststrs);
 
-        document.getElementById("testai").textContent += '\n IBAN simboliu skaicius : '+ numberlength;
+        for (let i = 0; i < ibanData.length; i++) {
+            if (numberfirststrs == ibanData[i][1]) {
+                ibanSallis = ibanData[i][0];
+                
+            }
+        } 
+
+
+        document.getElementById("testai").textContent += '\n IBAN salis : '+ ibanSallis;
+
+        document.getElementById("testai").textContent += '\n IBAN simboliu skaicius : '+ number.length;
 
         /////////////////  Pagal pirmus simbolius RAIDES   
         if (allLetter(numberfirststrs)) {
