@@ -18,12 +18,7 @@
         return !isNaN(val)
         } 
         
-    function imgCreate() {
-            var img = document.createElement('img');
-            img.src ='https://media.geeksforgeeks.org/wp-content/uploads/20190529122828/bs21.png';
-            document.getElementById('body').appendChild(img);
-        }    
-        
+    
 
     function checkIBAN() {
         var number = document.getElementById("ibantxt").value;
