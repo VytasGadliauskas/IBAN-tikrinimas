@@ -18,7 +18,12 @@
         return !isNaN(val)
         } 
         
-    
+    function imgCreate() {
+            var img = document.createElement('img');
+            img.src ='https://media.geeksforgeeks.org/wp-content/uploads/20190529122828/bs21.png';
+            document.getElementById('body').appendChild(img);
+        }    
+        
 
     function checkIBAN() {
         var number = document.getElementById("ibantxt").value;
@@ -38,7 +43,7 @@
         document.getElementById("testai").textContent += '\n Tikrinamas IBAN : '+ number;
 
         /////////////// 2022-03-12 dienos https://en.wikipedia.org/wiki/International_Bank_Account_Number  
-        var ibanData = [
+        const ibanData = [
             ["Albania",28,"8n,16c","AL kk bbb s sss x cccc cccc cccc cccc"],
             ["Andorra",24,"8n,12c","AD kk bbbb ssss cccc cccc cccc"],
             ["Austria",20,"16n","AT kk bbbb b ccc cccc cccc"],
@@ -121,7 +126,7 @@
         ];
 
         ////////////////////////////   Gali buti bugas su atitikimais raidziu i skaiciu R raide :( 
-        var ABC = [
+        const ABC = [
             ["A",10],
             ["B",11],
             ["C",12],
