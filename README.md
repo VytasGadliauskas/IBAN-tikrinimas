@@ -1,6 +1,6 @@
 IBAN numerio tikrinimas
 
-Bandymas pasirasyti java scripta kuris tikrintu IBAN numeri
+Bandymas pasirasyti java scripta kuris tikrintu IBAN numeri 
 
 
 https://vytasgadliauskas.github.io/IBAN-tikrinimas/IBAN.html
@@ -8,3 +8,31 @@ https://vytasgadliauskas.github.io/IBAN-tikrinimas/IBAN.html
 2022-03-12    Atnaujinta IBAN [National check digits]  DB is wiki 
 https://en.wikipedia.org/wiki/International_Bank_Account_Number#IBAN_formats_by_country
 	
+------------------------------------------ Originali uzduotis -----------------------------
+
+Užduotis: sąskaitų numerių IBAN tikrinimas.
+
+Parašyti programėlę, kuri dirbtų dviem rėžimais:
+    1. Interaktyvus IBAN numerių tikrinimas. Vartotojo paprašoma įvesti sąskaitos numerį ir programa išveda ar numeris yra teisingas
+    2. IBAN numerių iš tekstinio failo tikrinimas. Vartotojo paprašoma įvesti failo kelią ir pavadinimą. Programa nuskaito failą ir sutikrina sąskaitos numerius. Rezultatus išveda į tokio pat pavadinimo failą su plėtiniu .out. 
+
+        Pradinio failo struktūra: kiekviena eilutė - vienas sąskaitos numeris IBAN. Pvz:
+            AA051245445454552117989
+            LT647044001231465456
+            LT517044077788877777
+            LT227044077788877777
+            CC051245445454552117989
+
+        Rezultato failo struktūra: IBAN;valid. Pvz:
+            AA051245445454552117989;false
+            LT647044001231465456;true
+            LT517044077788877777;true
+            LT227044077788877777;false
+            CC051245445454552117989;false
+	3. (Papildoma) Servisas, kuris validuotų IBAN sąrašą. Protokolas http: Soap ir REST. 		
+
+Vartotojo sąsajai laisvas pasirinkimas (gali būti ir terminalė sąsaja).
+
+Technologijos: Java >=1.7
+
+Apie IBAN: https://en.wikipedia.org/wiki/International_Bank_Account_Number  
