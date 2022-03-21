@@ -1,0 +1,128 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@VytasGadliauskas 
+kydsib
+/
+IBAN-tikrinimas
+Public
+forked from VytasGadliauskas/IBAN-tikrinimas
+Code
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+IBAN-tikrinimas/IBAN.html
+@SimonasVsm
+SimonasVsm Komentarai
+Latest commit 9400b7a 2 hours ago
+ History
+ 2 contributors
+@VytasGadliauskas@SimonasVsm
+86 lines (79 sloc)  3.4 KB
+  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBAN</title>
+    <script src="IBAN_check.js"></script> 
+    <!-- script tagas dedamas i bofy tago apacia -->
+    <style>
+       /* stilius iskelciau i atskira css faila */
+        button {
+            height:25px; 
+            border-style: none; 
+            background-color: grey;
+            color: white; 
+            font-weight: bold;
+        }
+        
+        button:hover {
+            background-color: rgb(37, 37, 35);
+        }
+         
+        input:active {
+            color: black;
+        }
+    </style>
+
+</head>
+<body>
+  
+  <!-- vengciau inline stiliu, jie laikomi bloga praktika -->
+    <h1 style="text-align:center">IBAN kodo tikrinimas</h1> 
+    <h5 style="text-align:center; color:red;">Tikrinamas tik formato tesingumas, ne pats IBAN numeris [banko užklausų nėra!!!]</h5> 
+    <div>
+        <div style="width:60%; padding:20px; margin: auto;">
+           <label for="iban"> <b>IBAN numeris :</b> </label>
+           <input type="text" name="iban" id="ibantxt"  style="width:400px;" required>   
+           <!-- kadingi inputas nera formos elemente html validacija required laukui neveikia
+           jei nenaudojame HTML formos, reiketu atlikti validacija JS      -->
+           <button onclick="checkIBAN();">Tikrinti</button>
+        </div>
+        <div style="width:60%; padding:20px; margin: auto; display:flex; justify-content:space-between ;">
+            <div>
+                <fieldset style="width:270px; border:solid 1px;">
+                    <legend> IBAN informacija </legend> 
+                    <pre id="testai"></pre> 
+                </fieldset> 
+            </div>
+            <div>
+               <img src="IBAN-2.webp" alt="IBAN number" width="500" height="260">
+            </div>
+        </div>
+       <!-- puslapi butu galima padaryti responvise ir siekt tiek patobulinti bendra vazda
+       vizuali dalis galimai bus pirma vieta ka matys vartotojas, todel visada verta 
+        skirti truputi laiko padaryti ja grazesne vartotojui -->
+        <h5 style="text-align:left"><pre> 
+            ---------------- PAVYZDŽIAI ---------------
+            2022 m.  <a href="https://en.wikipedia.org/wiki/International_Bank_Account_Number">Wiki IBAN number</a>
+            -------------------------------------------
+            Belgium	BE71 0961 2345 6769
+            Brazil	BR15 0000 0000 0000 1093 2840 814 P2
+            Costa Rica	CR99 0000 0000 0000 8888 88
+            France	FR76 3000 6000 0112 3456 7890 189
+            Ireland	IE12 BOFI 9000 0112 3456 78
+            Germany	DE91 1000 0000 0123 4567 89
+            Greece	GR96 0810 0010 0000 0123 4567 890
+            Mauritius	MU43 BOMM 0101 1234 5678 9101 000 MUR
+            Pakistan	PK70 BANK 0000 1234 5678 9000
+            Poland	PL10 1050 0099 7603 1234 5678 9123
+            Romania	RO09 BCYP 0000 0012 3456 7890
+            Saint Lucia	LC14 BOSL 1234 5678 9012 3456 7890 1234
+            Saudi Arabia	SA44 2000 0001 2345 6789 1234
+            Slovakia	SK08 0900 0000 0001 2312 3123
+            Spain	ES79 2100 0813 6101 2345 6789
+            Sweden	SE87 3000 0000 0101 2345 6789
+            Switzerland	CH56 0483 5012 3456 7800 9
+            United Kingdom	GB98 MIDL 0700 9312 3456 78
+        
+        
+        </pre>
+        </h5>
+
+    </div> 
+</body>
+</html>
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete
