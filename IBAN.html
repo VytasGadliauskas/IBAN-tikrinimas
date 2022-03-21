@@ -5,8 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IBAN</title>
-    <script src="IBAN_check.js"></script>
+    <script src="IBAN_check.js"></script> 
+    <!-- script tagas dedamas i bofy tago apacia -->
     <style>
+       /* stilius iskelciau i atskira css faila */
         button {
             height:25px; 
             border-style: none; 
@@ -27,13 +29,15 @@
 </head>
 <body>
   
-
+  <!-- vengciau inline stiliu, jie laikomi bloga praktika -->
     <h1 style="text-align:center">IBAN kodo tikrinimas</h1> 
     <h5 style="text-align:center; color:red;">Tikrinamas tik formato tesingumas, ne pats IBAN numeris [banko užklausų nėra!!!]</h5> 
     <div>
         <div style="width:60%; padding:20px; margin: auto;">
            <label for="iban"> <b>IBAN numeris :</b> </label>
-           <input type="text" name="iban" id="ibantxt"  style="width:400px;" required>        
+           <input type="text" name="iban" id="ibantxt"  style="width:400px;" required>   
+           <!-- kadingi inputas nera formos elemente html validacija required laukui neveikia
+           jei nenaudojame HTML formos, reiketu atlikti validacija JS      -->
            <button onclick="checkIBAN();">Tikrinti</button>
         </div>
         <div style="width:60%; padding:20px; margin: auto; display:flex; justify-content:space-between ;">
@@ -47,7 +51,9 @@
                <img src="IBAN-2.webp" alt="IBAN number" width="500" height="260">
             </div>
         </div>
-       
+       <!-- puslapi butu galima padaryti responvise ir siekt tiek patobulinti bendra vazda
+       vizuali dalis galimai bus pirma vieta ka matys vartotojas, todel visada verta 
+        skirti truputi laiko padaryti ja grazesne vartotojui -->
         <h5 style="text-align:left"><pre> 
             ---------------- PAVYZDŽIAI ---------------
             2022 m.  <a href="https://en.wikipedia.org/wiki/International_Bank_Account_Number">Wiki IBAN number</a>

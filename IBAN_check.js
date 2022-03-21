@@ -3,6 +3,7 @@
 //
 
     function allLetter(inputtxt) { 
+      // inputTxt - naudojam camelCase
         var letters = /^[A-Za-z]+$/;
         if(inputtxt.match(letters))
             {
@@ -13,11 +14,15 @@
             return false;
             }
         }
+        // galima butu uzrasyti taip
+        // if(inputTxt.match(letters)) return true
+       // return false
 
     function isNum(val){
         return !isNaN(val)
         } 
-        
+      // perkelciua sita dali tiesiai i HTML, nematau naudos operacija atlikti per JS
+      // galetu buti naudinga, jei musu src value galetu keistis. 
     function imgCreate() {
             var img = document.createElement('img');
             img.src ='https://media.geeksforgeeks.org/wp-content/uploads/20190529122828/bs21.png';
@@ -26,9 +31,17 @@
         
 
     function checkIBAN() {
+      // var nenaudociau kadangi turime let / const. Kadangi nedirbame su 
+      // sena kodo baze, var vengciau.
         var number = document.getElementById("ibantxt").value;
+        // keisciau kintamojo pavadinima. number sako, kad tikiuosi skaiciu,
+        // todel number.toUpperCase() atrodo keistai.
+        // let IBAN = ...
         number = number.toUpperCase();
         number = number.replace(/\s/g, '');
+        // JS sukuria zemiau esancius kintamuosius, taciau sitos praktikos reiketu vengti
+        // nes ji gali nevisur veikti. Rekomenduociau kintamuosius sukikurti paciam. let ibanSalis
+        // Rekomenduociau naudoti angliskus pavadinimus. Kadangi imonese kintamieji bus aprasinejami butent taip
         ibanSallis = '';
         ibanIlgis = 0;
         ibanBBAN = '';
@@ -36,14 +49,20 @@
         ibanOK = false;
         ibanMOD97 = '';
         ibanLiek = 0;
-
+        // toks stiliau pridejimas sukuria inline stiliu. Naudociau setAttribute ir prideciau viena arba kita
+        // klase priklausomai nuo to ko mums reikia https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute
         document.getElementById("testai").style.color = "black";
         document.getElementById("testai").textContent = '';
         document.getElementById("testai").textContent += '\n';
         document.getElementById("testai").textContent += '\n Tikrinamas IBAN : '+ number;
-
+        
         /////////////// 2022-03-12 dienos https://en.wikipedia.org/wiki/International_Bank_Account_Number  
+        // pasalinciau visus nebutinus komentarus. Reikalingi tik tie, kurie paaiskintu sudetingesne logika. 
+        // logikos sudetinguma reiketu vertinti pagal tai, kas skaitys koda. Ji skaitys ne Junior programuotojai,
+        // todel komentaru turetu buti minimaliai.
         const ibanData = [
+          // cia komentaras visai praversu, nes suprantu tik kelis laukus
+          // kitus tenka spelioti arba googlinti. 
             ["Albania",28,"8n,16c","AL kk bbb s sss x cccc cccc cccc cccc"],
             ["Andorra",24,"8n,12c","AD kk bbbb ssss cccc cccc cccc"],
             ["Austria",20,"16n","AT kk bbbb b ccc cccc cccc"],
@@ -124,8 +143,17 @@
             ["Vatican City",22,"3n,15n","VA kk bbb c cccc cccc cccc cc"],
             ["Virgin Islands, British",24,"4c,16n","VG kk bbbb cccc cccc cccc cccc"]
         ];
+              // manau, kad naudoti array of objects struktura butu paprasciau
+            // const ibanData = [{
+        //       countryName: 'Ukraine',
+        //       ibanLength: 28
+        //     },
+        //  {}, {}, {} ]
 
+        // jei neiseina isspresti, reiketu paaskinti kas buvo bandyta, del ko jis gali buti
         ////////////////////////////   Gali buti bugas su atitikimais raidziu i skaiciu R raide :( 
+          // neaiskus kintamojo pavadinimas, ji perskaicius neaisku kam bus naudojamas
+          // galimai vel butu patogiau naudoti [{}, {}]
         const ABC = [
             ["A",10],
             ["B",11],
@@ -155,6 +183,7 @@
             ["Z",35]
         ];
 
+        // naudojant objektus kintamuju reiksmes butu zymiai paprasciau pasiekti.
         for (let i = 0; i < ibanData.length; i++) {
             if (number.slice(0,2) == ibanData[i][3].slice(0,2)) {
                 ibanSalis = ibanData[i][0];
@@ -164,15 +193,21 @@
 
             }
         } 
-         
+
         function ABCtoNUM (aaa) {
+          // neaisku kas yra aaa, letterToNumber, ibanCodeConversion butu aiskesni pavadinimai
             bbb = '';
             ccc = '';
+            // vel turetumeme patys apsirasyti kintamuosius let something = '', 
             for (let i = 0; i < aaa.length; i++) { 
                 ccc = aaa.slice(i,i+1);
+                // ccc === aaa... nieko nesako, reikia grizti i kodo pradzia ir analizuoti kas yra kas
                 if (allLetter(ccc)){
                     for (let ii = 0; ii < ABC.length; ii++) { 
+                      // jei i jau naudojome kitas kintamasis tuetu buti sekanti abeceles raide
+                      // tokia yra nusistovejusi praktika 
                         if (ABC[ii][0] == ccc) {
+                          // ziurint i kintamuju pavadinimus neimanoma suprasti kas vyksta
                             bbb += ABC[ii][1];
                         }
                     }
@@ -185,15 +220,18 @@
 
         /////////////////////////////// Sita nufirinau nes ISO7064 nerandu online
         function mod9710(iban) {
-            /*
+          // cia gero komentaro pavyzdys
+            /* 
             Calculates the MOD 97 10 of the passed IBAN as specified in ISO7064.
             @method mod9710
             @param {String} iban
             @returns {Number}
             */
             var block, remainder;
+            // let ...
             remainder = iban;
             block = null;
+            // jei kintamajam iskarto priskiriame reiksme geriau rasyti let block = null
           
             while (remainder.length > 2) {
               block = remainder.slice(0, 9);
@@ -204,20 +242,27 @@
           }
 
         ///////////////////////////////////////////////////////// TESTAI 
-        console.clear();
+        console.clear(); 
         console.log('------------------ debug-as --------------------');   
+        // console.log'us atlikus uzduoti reiketu pasalinti.
+        // ju palikimas kode laikomas bloga praktika
         /////////////////  Pagal pirmus simbolius   
         if (allLetter(number.slice(0,2))) {
             console.log('Pirmi du simboliai:',number,' raides: OK');
             ibanOK = true;
+        // if (allLetter(number.slice(0,2))) ibankOk = true;
                 /////////////////////////  Pagal salies kodo ilgi
                 if  (number.length == ibanIlgis) {
+                  // rekomneduojama naudoti === 
                     console.log('Simboliu skaicius:',number.length,' atitinka salies IBAN ilgi: OK');
                     /////////////////////////  Pagal antrinius simbolius
                     if (isNum(number.slice(2,4))) {
+                      // isNum(number) - skaitosi prastai, kadangi atrodo, jog tikrinsime skaiciu
+                      // bet is slice suprantu, kad tai stringas - klaidinantis pavadinimas
                         console.log('Kiti du simboliai:',number.slice(2,4),' atitinka skaiciai: OK');
                         ////////////////////////   mod-97
                         console.log('Skaiciuojam MOD97: ');
+                        // kintamieji neapibrezti, taip pat galetu buti aiskesniais pavadinimais
                         mod97fir = ABCtoNUM(number.slice(0,2));
                         mod97mid = number.slice(2,4);
                         mod97sec = ABCtoNUM(number.slice(4,number.length));
@@ -231,13 +276,17 @@
                         if (ibanLiek == 1) { 
                             ibanOK = true;    
                         } else {
+                          // else isviso nevykdomas? jei jo nereikia
+                          // else dali isviso pasaliname ji nera butina
                         //    ibanOK = false;    
                         }
 
                         
                     } else {
                         ibanOK = false;    
-                    }
+                    } // gal butu galima isvegti tiek if else nestinimo
+                    // naudojant fukcijas, kurios atliktu kazkuria patikrinimo dali
+                    // 
 
                 } else {
                     ibanOK = false;    
