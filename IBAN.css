@@ -1,0 +1,15 @@
+button {
+    height:25px; 
+    border-style: none; 
+    background-color: grey;
+    color: white; 
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: rgb(37, 37, 35);
+}
+ 
+input:active {
+    color: black;
+}

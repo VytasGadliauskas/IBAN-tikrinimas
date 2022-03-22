@@ -1,48 +1,32 @@
-//
-//  IBAN kodo tikrinmas
-//
 
     function allLetter(inputtxt) { 
-        var letters = /^[A-Za-z]+$/;
-        if(inputtxt.match(letters))
-            {
-            return true;
-            }
-        else
-            {
+        const letters = /^[A-Za-z]+$/;
+        if(inputtxt.match(letters)) return true
             return false;
-            }
-        }
+    }
 
     function isNum(val){
         return !isNaN(val)
         } 
-        
-    function imgCreate() {
-            var img = document.createElement('img');
-            img.src ='https://media.geeksforgeeks.org/wp-content/uploads/20190529122828/bs21.png';
-            document.getElementById('body').appendChild(img);
-        }    
-        
 
     function checkIBAN() {
-        var number = document.getElementById("ibantxt").value;
-        number = number.toUpperCase();
-        number = number.replace(/\s/g, '');
-        ibanSallis = '';
-        ibanIlgis = 0;
-        ibanBBAN = '';
-        ibanFORM = '';
-        ibanOK = false;
-        ibanMOD97 = '';
-        ibanLiek = 0;
+        let ibanNumber = document.getElementById("ibantxt").value;
+        ibanNumber = ibanNumber.toUpperCase();
+        ibanNumber = ibanNumber.replace(/\s/g, '');
+        let ibanSallis = '';
+        let ibanIlgis = 0;
+        let ibanBBAN = '';
+        let ibanFORM = '';
+        let ibanOK = false;
+        let ibanMOD97 = '';
+        let ibanLiek = 0;
 
         document.getElementById("testai").style.color = "black";
         document.getElementById("testai").textContent = '';
         document.getElementById("testai").textContent += '\n';
-        document.getElementById("testai").textContent += '\n Tikrinamas IBAN : '+ number;
+        document.getElementById("testai").textContent += '\n Tikrinamas IBAN : '+ ibanNumber;
 
-        /////////////// 2022-03-12 dienos https://en.wikipedia.org/wiki/International_Bank_Account_Number  
+        //  "Salis",Salies IBAN ilgis,"BBAN","Salies IBAN formatas"
         const ibanData = [
             ["Albania",28,"8n,16c","AL kk bbb s sss x cccc cccc cccc cccc"],
             ["Andorra",24,"8n,12c","AD kk bbbb ssss cccc cccc cccc"],
@@ -125,8 +109,9 @@
             ["Virgin Islands, British",24,"4c,16n","VG kk bbbb cccc cccc cccc cccc"]
         ];
 
-        ////////////////////////////   Gali buti bugas su atitikimais raidziu i skaiciu R raide :( 
-        const ABC = [
+        ////////////////////////////   Gali buti bugas - R raide ir jos atitikimas i 33 koda spejamas.
+     
+        const ibanABC  = [
             ["A",10],
             ["B",11],
             ["C",12],
@@ -156,34 +141,35 @@
         ];
 
         for (let i = 0; i < ibanData.length; i++) {
-            if (number.slice(0,2) == ibanData[i][3].slice(0,2)) {
+            if (ibanNumber.slice(0,2) == ibanData[i][3].slice(0,2)) {
                 ibanSalis = ibanData[i][0];
                 ibanIlgis = ibanData[i][1];
                 ibanBBAN = ibanData[i][2];
                 ibanFORM = ibanData[i][3];
-
             }
         } 
          
-        function ABCtoNUM (aaa) {
-            bbb = '';
-            ccc = '';
-            for (let i = 0; i < aaa.length; i++) { 
-                ccc = aaa.slice(i,i+1);
-                if (allLetter(ccc)){
-                    for (let ii = 0; ii < ABC.length; ii++) { 
-                        if (ABC[ii][0] == ccc) {
-                            bbb += ABC[ii][1];
+        function ABCtoNUM (variable) {
+            //  Konvertuoja IBAN raides i skaicius pagal ibanABC duomenis  
+            //  paduodama IBAN raides, grazina skaicius
+            let grazinamasVariable = '';
+            let tarpinisVariable = '';
+            for (let i = 0; i < variable.length; i++) { 
+                tarpinisVariable = variable.slice(i,i+1);
+                if (allLetter(tarpinisVariable)){
+                    for (let j = 0; j < ibanABC.length; j++) { 
+                        if (ibanABC[j][0] == tarpinisVariable) {
+                            grazinamasVariable += ibanABC[j][1];
                         }
                     }
                 } else {
-                    bbb += ccc;
+                    grazinamasVariable += tarpinisVariable;
                 }
             } 
-            return bbb;
+            return grazinamasVariable;
         }
 
-        /////////////////////////////// Sita nufirinau nes ISO7064 nerandu online
+
         function mod9710(iban) {
             /*
             Calculates the MOD 97 10 of the passed IBAN as specified in ISO7064.
@@ -191,7 +177,7 @@
             @param {String} iban
             @returns {Number}
             */
-            var block, remainder;
+            let block, remainder;
             remainder = iban;
             block = null;
           
@@ -203,37 +189,18 @@
             return Number.parseInt(remainder) % 97;
           }
 
-        ///////////////////////////////////////////////////////// TESTAI 
-        console.clear();
-        console.log('------------------ debug-as --------------------');   
-        /////////////////  Pagal pirmus simbolius   
-        if (allLetter(number.slice(0,2))) {
-            console.log('Pirmi du simboliai:',number,' raides: OK');
+        if (allLetter(ibanNumber.slice(0,2))) {
             ibanOK = true;
-                /////////////////////////  Pagal salies kodo ilgi
-                if  (number.length == ibanIlgis) {
-                    console.log('Simboliu skaicius:',number.length,' atitinka salies IBAN ilgi: OK');
-                    /////////////////////////  Pagal antrinius simbolius
-                    if (isNum(number.slice(2,4))) {
-                        console.log('Kiti du simboliai:',number.slice(2,4),' atitinka skaiciai: OK');
-                        ////////////////////////   mod-97
-                        console.log('Skaiciuojam MOD97: ');
-                        mod97fir = ABCtoNUM(number.slice(0,2));
-                        mod97mid = number.slice(2,4);
-                        mod97sec = ABCtoNUM(number.slice(4,number.length));
-                        console.log('IBAN: ',number);
-                        console.log('Perkialiam: ',number.slice(4,number.length)+number.slice(0,2)+mod97mid);
-                        mod97 = mod97sec + mod97fir + mod97mid;
-                        console.log('Konveruojam i  skaicius: ',mod97sec,' ',mod97fir,' ',mod97mid ); 
-                        console.log('Skaicius: ',mod97); 
+                if  (ibanNumber.length == ibanIlgis) {
+                    if (isNum(ibanNumber.slice(2,4))) {
+                        mod97PirmiSimboliai = ABCtoNUM(ibanNumber.slice(0,2));
+                        mod97AntriSimboliai = ibanNumber.slice(2,4);
+                        mod97PasilikeSimboliai = ABCtoNUM(ibanNumber.slice(4,ibanNumber.length));
+                        mod97 = mod97PasilikeSimboliai + mod97PirmiSimboliai + mod97AntriSimboliai;
                         ibanLiek = mod9710(mod97);
-                        console.log('MOD9710 (ISO7064): ', ibanLiek); 
                         if (ibanLiek == 1) { 
                             ibanOK = true;    
-                        } else {
-                        //    ibanOK = false;    
-                        }
-
+                        } 
                         
                     } else {
                         ibanOK = false;    
@@ -263,9 +230,7 @@
             document.getElementById("testai").textContent += '\n IBAN kodo KLAIDA (KODAS NETEISINGAS -!!!)';
             document.getElementById("testai").style.color = "red";
         }
-
         document.getElementById("ibantxt").value = null; 
-
         ////////////////   HAPPY END I AM PROUD OF MYSELF :)   mail.: vytasgadliauskas@gmail.com
     }
 
