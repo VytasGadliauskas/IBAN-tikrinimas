@@ -1,3 +1,27 @@
+.main {
+   
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+}
+
+.virsus {
+    width:100%; 
+    padding:20px; 
+    text-align: center;
+}
+
+.rez {
+    width: 80%;
+}
+
+.pvz  {
+    width: 100%;
+} 
+
+
 button {
     height:25px; 
     border-style: none; 
